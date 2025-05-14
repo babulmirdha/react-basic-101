@@ -3,6 +3,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Counter from './components/counter'
+import Timer from './components/Timer'
+import FocusInput from './components/FocusInput'
+import { CounterProvider } from './components/CounterContext'
 
 function App() {
 
@@ -13,8 +16,14 @@ function App() {
     setIsCounterShow(true)
   }
 
+
+  const handleShowTimer = () =>{
+    return (<Timer/>)
+  }
+
+
   return (
-    <>
+    <CounterProvider>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -27,15 +36,22 @@ function App() {
       <div className="card">
 
 
-        {<Counter />}
+        { isCounterShow && <Counter />}
+
+
+        <Timer/>
+
+        <FocusInput/>
+        
 
       </div>
       <p className="read-the-docs">
 
-        <button onclick={handleShowCounter()} > Show Counter</button>
+        <button onClick={handleShowCounter} > Show Counter</button>
+        <button onClick={handleShowTimer} > Show Timmer</button>
 
       </p>
-    </>
+    </CounterProvider>
   )
 }
 
